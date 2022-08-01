@@ -1,0 +1,5 @@
+const formatDate = (format, date) => moment(date).format(format);
+export {
+     formatDate,
+     myOtherUtil,
+};
