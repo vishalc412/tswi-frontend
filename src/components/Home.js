@@ -7,7 +7,7 @@ const Home = () => {
         <hr/>
         
   <div >
-  <img className="profile-photo" src={require("/Users/vishalchawla/Documents/DeepakAuto/react-tswi/src/ImageAuto.gif")} alt={"Carlie Anglemire"}/>
+  <img className="profile-photo" src={require("C:/Users/chawl/Documents/GitHub/tswi-frontend/src/ImageAuto.gif")} alt={"Carlie Anglemire"}/>
   </div>
     </div>);
 }

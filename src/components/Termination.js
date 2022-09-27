@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import twsiService from "../Service/twsi.service";
 
 const Termination = () => {
-    const[chasino, setChasiNo] = useState('');
+    const[chassisNo, setChassisNo] = useState('');
     const[terminationDt, setTerminationDt] = useState('');
-    const[docurl, setDocUrl] = useState('');
-    const[regnno, setRegnNo] = useState('');
+    const[docUrl, setDocUrl] = useState('');
+    const[regnNo, setRegnNo] = useState('');
     const [hasError, setHasError] = useState('');
     const [isSuccess, setIsSuccess] = useState('');
 
     const processTermination = (e) => {
         e.preventDefault();
         
-        const termination = {chasino, terminationDt, docurl,regnno};
+        const termination = {chassisNo, terminationDt, docUrl,regnNo};
         try {
             twsiService.termination(termination)
               .then(response => {
@@ -51,9 +51,9 @@ const Termination = () => {
                 <input 
                         type="text" 
                         className="form-control col-4"
-                        id="chasino"
-                        value={chasino}
-                        onChange={(e) => setChasiNo(e.target.value)}
+                        id="chassisNo"
+                        value={chassisNo}
+                        onChange={(e) => setChassisNo(e.target.value)}
                         placeholder="Chasis Number"
                     />
 
@@ -81,8 +81,8 @@ const Termination = () => {
                     <input 
                         type="text" 
                         className="form-control col-4"
-                        id="docurl"
-                        value={docurl}
+                        id="docUrl"
+                        value={docUrl}
                         onChange={(e) => setDocUrl(e.target.value)}
                         placeholder="Document Url"
                     />
@@ -96,8 +96,8 @@ const Termination = () => {
                     <input 
                         type="text" 
                         className="form-control col-4"
-                        id="regnno"
-                        value={regnno}
+                        id="regnNo"
+                        value={regnNo}
                         onChange={(e) => setRegnNo(e.target.value)}
                         placeholder="Registration No."
                     />

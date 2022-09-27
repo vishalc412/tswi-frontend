@@ -105,8 +105,8 @@ const Addition = () => {
                     className="form-control col-4"
                     id="hpaFrom"
                     value={hpa_from}
-                    onChange={(e) =>validateDate(e.target.value)}
-                    //onChange={(e) => setHpa_from(e.target.value)}
+                    //onChange={(e) =>validateDate(e.target.value)}
+                    onChange={(e) => setHpa_from(e.target.value)}
                     placeholder="Date(YYYY-MM-DD)"
                   />
         <span style={{
