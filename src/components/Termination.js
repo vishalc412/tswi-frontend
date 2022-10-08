@@ -17,6 +17,7 @@ const Termination = () => {
             twsiService.termination(termination)
               .then(response => {
                 console.log("HPA termination successfully", response.data);
+                console.log("Status "+response.status+" respoinse"+response.data);
                 if (response.status === "ok") {
                   // check if the internal status is ok
                   // then pass on the data
