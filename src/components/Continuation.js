@@ -20,16 +20,17 @@ const Continuation = () => {
             twsiService.continuation(continuation)
               .then(response => {
                 console.log("HPA continued successfully", response.data);
-                if (response.status === "ok") {
+                if (response.data.status === "ok") {
                   // check if the internal status is ok
                   // then pass on the data
-                  setIsSuccess("Success");
+                  
+                  setIsSuccess(response.data.statusText);
                 } else {
                   // if internally there are errors
                   // pass on the error, in a correct implementation
                   // such errors should throw an HTTP 4xx or 5xx error
                   // so that it directs straight to the catch block
-                  setHasError("Error: Failure due to credential issue");
+                  setHasError(response.data.statusText);
                 }
               })
               .catch(error => {
