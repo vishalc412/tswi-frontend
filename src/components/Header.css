@@ -1,0 +1,22 @@
+/* Header.css */
+
+.header {
+  background-color: #484141;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.header-img {
+  width: fit-content; /* Adjust width as needed */
+  object-fit: cover;
+  margin-left: 0%;
+}
+
+.header-p {
+  margin: 0;
+  font-size: 2rem;
+  color: #bb2626;
+  font-family: "Roboto Condensed", sans-serif;
+  text-align: center;
+}
