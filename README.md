@@ -1,71 +1,188 @@
-# Getting Started with Create React App
+# MS EXIMP Hypothecation Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)
+![Next.js](https://img.shields.io/badge/Next.js-14-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+
+A modern, professional vehicle hypothecation management system built with Next.js 14, TypeScript, and Tailwind CSS. Designed for financial institutions to efficiently manage the complete lifecycle of vehicle hypothecation agreements.
+
+## Features
+
+### Core Functionality
+- **Hypothecation Addition**: Create new hypothecation agreements with comprehensive vehicle details
+- **Hypothecation Continuation**: Extend existing hypothecation periods seamlessly
+- **Hypothecation Termination**: Close completed agreements with proper documentation
+
+### Technical Highlights
+- Built with Next.js 14 App Router for optimal performance
+- TypeScript for type safety and better developer experience
+- Modern, responsive UI with Tailwind CSS
+- Form validation using Zod and react-hook-form
+- Dual mode support: Dummy mode for testing, Production mode for live backend
+- Comprehensive Selenium test automation suite
+- Mobile-first responsive design
+- Professional logo and branding
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18.x or higher
+- npm or yarn package manager
+- Python 3.8+ (for Selenium tests)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd tswi-frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment**
+
+   Create a `.env.local` file in the root directory:
+   ```env
+   # API Configuration
+   # Set to 'dummy' for testing without backend, 'production' for real backend
+   NEXT_PUBLIC_API_MODE=dummy
+
+   # Backend API URL (used when API_MODE=production)
+   NEXT_PUBLIC_API_URL=http://localhost:8080
+
+   # Application
+   NEXT_PUBLIC_APP_NAME="MS EXIMP Hypothecation Management"
+   NEXT_PUBLIC_APP_VERSION=2.0.0
+   ```
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open your browser**
+
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## Project Structure
+
+```
+tswi-frontend/
+├── src/
+│   ├── app/                    # Next.js App Router pages
+│   │   ├── addition/          # Addition workflow page
+│   │   ├── continuation/      # Continuation workflow page
+│   │   ├── termination/       # Termination workflow page
+│   │   ├── layout.tsx         # Root layout with navigation
+│   │   ├── page.tsx           # Homepage
+│   │   └── globals.css        # Global styles
+│   ├── components/            # React components
+│   │   ├── ui/                # Reusable UI components
+│   │   ├── Logo.tsx           # Application logo component
+│   │   └── Navigation.tsx     # Navigation bar
+│   └── lib/                   # Utility functions
+│       ├── api.ts             # API service layer
+│       └── utils.ts           # Helper functions
+├── tests/
+│   └── selenium/              # Selenium test automation
+├── public/                    # Static assets
+├── .env.local                 # Environment configuration
+├── next.config.js             # Next.js configuration
+├── tailwind.config.ts         # Tailwind CSS configuration
+├── tsconfig.json              # TypeScript configuration
+└── package.json               # Project dependencies
+```
 
 ## Available Scripts
 
-In the project directory, you can run:
+### Development
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+```
 
-### `npm start`
+### Testing
+```bash
+# Run Selenium tests (requires dev server running)
+npm run test:e2e
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Or run tests manually
+python tests/selenium/run_tests.py
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## API Modes
 
-### `npm test`
+### Dummy Mode (Default)
+Perfect for testing and development without a backend server.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Set in `.env.local`:
+```env
+NEXT_PUBLIC_API_MODE=dummy
+```
 
-### `npm run build`
+### Production Mode
+Connect to real backend API at http://localhost:8080/warryworks
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Set in `.env.local`:
+```env
+NEXT_PUBLIC_API_MODE=production
+NEXT_PUBLIC_API_URL=http://localhost:8080
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Testing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Automated Testing with Selenium
 
-### `npm run eject`
+1. Install test dependencies: `pip install -r tests/selenium/requirements.txt`
+2. Start dev server: `npm run dev`
+3. Run tests: `python tests/selenium/run_tests.py`
+4. View report: `tests/selenium/test_report.html`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Design System
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Colors
+- **Primary**: Blue gradient
+- **Secondary**: Purple gradient
+- **Success**: Green
+- **Error**: Red
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Components
+Built with modern UI principles, fully responsive and accessible.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Deployment
 
-## Learn More
+### Vercel (Recommended)
+```bash
+vercel
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Docker
+```bash
+docker build -t ms-eximp .
+docker run -p 3000:3000 ms-eximp
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Migration from v1.x
 
-### Code Splitting
+Complete rewrite with Next.js 14, TypeScript, Tailwind CSS, and all business logic preserved.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Changelog
 
-### Analyzing the Bundle Size
+### Version 2.0.0 (2024)
+- Complete Next.js 14 migration
+- TypeScript implementation
+- Modern UI with Tailwind CSS
+- Comprehensive test automation
+- Professional branding
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# tswi-frontend
+**Built for Financial Institutions**
