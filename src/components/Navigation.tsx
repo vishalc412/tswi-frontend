@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Logo from './Logo'
-import { Menu, X, Home, PlusCircle, RefreshCw, XCircle } from 'lucide-react'
+import { Menu, X, Home, PlusCircle, RefreshCw, XCircle, FileText } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const Navigation = () => {
@@ -16,6 +16,7 @@ const Navigation = () => {
     { name: 'Addition', href: '/addition', icon: PlusCircle },
     { name: 'Continuation', href: '/continuation', icon: RefreshCw },
     { name: 'Termination', href: '/termination', icon: XCircle },
+    { name: 'Reports', href: '/reports', icon: FileText },
   ]
 
   return (

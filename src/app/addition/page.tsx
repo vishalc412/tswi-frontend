@@ -13,9 +13,9 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { apiService } from '@/lib/api'
 import { PlusCircle, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
 
-// Form validation schema
+// Form validation schema - Field names match backend API specification
 const additionSchema = z.object({
-  chasino: z.string().min(1, 'Chassis number is required').min(5, 'Chassis number must be at least 5 characters'),
+  chasiNo: z.string().min(1, 'Chassis number is required').min(5, 'Chassis number must be at least 5 characters'),
   eng_no: z.string().min(1, 'Engine number is required').min(5, 'Engine number must be at least 5 characters'),
   hpa_from: z.string().min(1, 'HPA From date is required').refine((val) => validator.isDate(val), {
     message: 'Please enter a valid date in YYYY-MM-DD format',
@@ -24,7 +24,7 @@ const additionSchema = z.object({
     message: 'Please enter a valid date in YYYY-MM-DD format',
   }),
   docurl: z.string().min(1, 'Document URL is required').url('Please enter a valid URL'),
-  regnno: z.string().min(1, 'Registration number is required'),
+  regnNo: z.string().min(1, 'Registration number is required'),
 })
 
 type AdditionFormData = z.infer<typeof additionSchema>
@@ -97,17 +97,17 @@ export default function AdditionPage() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {/* Chassis Number */}
               <div className="space-y-2">
-                <Label htmlFor="chasino">
+                <Label htmlFor="chasiNo">
                   Chassis Number <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  id="chasino"
+                  id="chasiNo"
                   placeholder="Enter chassis number"
-                  {...register('chasino')}
+                  {...register('chasiNo')}
                   disabled={isSubmitting}
                 />
-                {errors.chasino && (
-                  <p className="text-sm text-red-600">{errors.chasino.message}</p>
+                {errors.chasiNo && (
+                  <p className="text-sm text-red-600">{errors.chasiNo.message}</p>
                 )}
               </div>
 
@@ -181,17 +181,17 @@ export default function AdditionPage() {
 
               {/* Registration Number */}
               <div className="space-y-2">
-                <Label htmlFor="regnno">
+                <Label htmlFor="regnNo">
                   Registration Number <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  id="regnno"
+                  id="regnNo"
                   placeholder="Enter registration number (e.g., MH12AB1234)"
-                  {...register('regnno')}
+                  {...register('regnNo')}
                   disabled={isSubmitting}
                 />
-                {errors.regnno && (
-                  <p className="text-sm text-red-600">{errors.regnno.message}</p>
+                {errors.regnNo && (
+                  <p className="text-sm text-red-600">{errors.regnNo.message}</p>
                 )}
               </div>
 

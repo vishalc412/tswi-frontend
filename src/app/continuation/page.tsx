@@ -13,19 +13,19 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { apiService } from '@/lib/api'
 import { RefreshCw, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
 
-// Form validation schema
+// Form validation schema - Field names match backend API specification
 const continuationSchema = z.object({
   transactionId: z.string().min(1, 'Transaction ID is required'),
-  chasino: z.string().min(1, 'Chassis number is required').min(5, 'Chassis number must be at least 5 characters'),
-  fncrCode: z.string().min(1, 'FNCR code is required'),
-  hpa_from: z.string().min(1, 'HPA From date is required').refine((val) => validator.isDate(val), {
+  chasiNo: z.string().min(1, 'Chassis number is required').min(5, 'Chassis number must be at least 5 characters'),
+  fncrCode: z.coerce.number({ required_error: 'FNCR code is required' }).positive('FNCR code must be a positive number'),
+  hpc_from: z.string().min(1, 'HPC From date is required').refine((val) => validator.isDate(val), {
     message: 'Please enter a valid date in YYYY-MM-DD format',
   }),
-  hpa_upto: z.string().min(1, 'HPA Upto date is required').refine((val) => validator.isDate(val), {
+  hpc_upto: z.string().min(1, 'HPC Upto date is required').refine((val) => validator.isDate(val), {
     message: 'Please enter a valid date in YYYY-MM-DD format',
   }),
   docurl: z.string().min(1, 'Document URL is required').url('Please enter a valid URL'),
-  regnno: z.string().min(1, 'Registration number is required'),
+  regnNo: z.string().min(1, 'Registration number is required'),
 })
 
 type ContinuationFormData = z.infer<typeof continuationSchema>
@@ -114,17 +114,17 @@ export default function ContinuationPage() {
 
               {/* Chassis Number */}
               <div className="space-y-2">
-                <Label htmlFor="chasino">
+                <Label htmlFor="chasiNo">
                   Chassis Number <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  id="chasino"
+                  id="chasiNo"
                   placeholder="Enter chassis number"
-                  {...register('chasino')}
+                  {...register('chasiNo')}
                   disabled={isSubmitting}
                 />
-                {errors.chasino && (
-                  <p className="text-sm text-red-600">{errors.chasino.message}</p>
+                {errors.chasiNo && (
+                  <p className="text-sm text-red-600">{errors.chasiNo.message}</p>
                 )}
               </div>
 
@@ -135,7 +135,8 @@ export default function ContinuationPage() {
                 </Label>
                 <Input
                   id="fncrCode"
-                  placeholder="Enter FNCR code"
+                  type="number"
+                  placeholder="Enter FNCR code (e.g., 12345)"
                   {...register('fncrCode')}
                   disabled={isSubmitting}
                 />
@@ -147,34 +148,34 @@ export default function ContinuationPage() {
               {/* Date Fields */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="hpa_from">
+                  <Label htmlFor="hpc_from">
                     HPA From Date <span className="text-red-500">*</span>
                   </Label>
                   <Input
-                    id="hpa_from"
+                    id="hpc_from"
                     type="date"
                     placeholder="YYYY-MM-DD"
-                    {...register('hpa_from')}
+                    {...register('hpc_from')}
                     disabled={isSubmitting}
                   />
-                  {errors.hpa_from && (
-                    <p className="text-sm text-red-600">{errors.hpa_from.message}</p>
+                  {errors.hpc_from && (
+                    <p className="text-sm text-red-600">{errors.hpc_from.message}</p>
                   )}
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="hpa_upto">
+                  <Label htmlFor="hpc_upto">
                     HPA Upto Date <span className="text-red-500">*</span>
                   </Label>
                   <Input
-                    id="hpa_upto"
+                    id="hpc_upto"
                     type="date"
                     placeholder="YYYY-MM-DD"
-                    {...register('hpa_upto')}
+                    {...register('hpc_upto')}
                     disabled={isSubmitting}
                   />
-                  {errors.hpa_upto && (
-                    <p className="text-sm text-red-600">{errors.hpa_upto.message}</p>
+                  {errors.hpc_upto && (
+                    <p className="text-sm text-red-600">{errors.hpc_upto.message}</p>
                   )}
                 </div>
               </div>
@@ -198,17 +199,17 @@ export default function ContinuationPage() {
 
               {/* Registration Number */}
               <div className="space-y-2">
-                <Label htmlFor="regnno">
+                <Label htmlFor="regnNo">
                   Registration Number <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  id="regnno"
+                  id="regnNo"
                   placeholder="Enter registration number (e.g., MH12AB1234)"
-                  {...register('regnno')}
+                  {...register('regnNo')}
                   disabled={isSubmitting}
                 />
-                {errors.regnno && (
-                  <p className="text-sm text-red-600">{errors.regnno.message}</p>
+                {errors.regnNo && (
+                  <p className="text-sm text-red-600">{errors.regnNo.message}</p>
                 )}
               </div>
 
