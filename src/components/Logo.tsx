@@ -8,67 +8,57 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ className = '', size = 'md', showText = true }) => {
   const sizes = {
-    sm: { svg: 'h-8 w-8', text: 'text-lg' },
-    md: { svg: 'h-10 w-10', text: 'text-xl' },
-    lg: { svg: 'h-14 w-14', text: 'text-2xl' },
-    xl: { svg: 'h-20 w-20', text: 'text-4xl' },
+    sm: { svg: 'h-8 w-8', text: 'text-base' },
+    md: { svg: 'h-10 w-10', text: 'text-lg' },
+    lg: { svg: 'h-12 w-12', text: 'text-xl' },
+    xl: { svg: 'h-16 w-16', text: 'text-2xl' },
   }
 
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
+    <div className={`flex items-center gap-2.5 ${className}`}>
+      {/* Professional banking logo - Shield with document */}
       <svg
         className={sizes[size].svg}
         viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Shield background representing security */}
+        {/* Shield outline - represents security */}
         <path
-          d="M50 5L15 20V45C15 65 25 80 50 95C75 80 85 65 85 45V20L50 5Z"
-          fill="url(#gradient1)"
-          stroke="url(#gradient2)"
-          strokeWidth="2"
+          d="M50 8L18 22V48C18 66 28 80 50 92C72 80 82 66 82 48V22L50 8Z"
+          fill="#0a1929"
+          stroke="#334e68"
+          strokeWidth="1.5"
         />
 
-        {/* Vehicle silhouette */}
+        {/* Inner shield highlight */}
         <path
-          d="M30 50H70L65 40H35L30 50Z"
-          fill="white"
-          opacity="0.9"
+          d="M50 15L25 26V48C25 62 33 73 50 83C67 73 75 62 75 48V26L50 15Z"
+          fill="#243b53"
         />
-        <circle cx="38" cy="55" r="5" fill="white" opacity="0.9" />
-        <circle cx="62" cy="55" r="5" fill="white" opacity="0.9" />
 
-        {/* Checkmark/tick representing verified/approved */}
+        {/* Document/paper icon in center */}
+        <rect x="38" y="35" width="24" height="30" rx="2" fill="white" opacity="0.95" />
+        <line x1="42" y1="42" x2="58" y2="42" stroke="#243b53" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="42" y1="48" x2="58" y2="48" stroke="#243b53" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="42" y1="54" x2="52" y2="54" stroke="#243b53" strokeWidth="1.5" strokeLinecap="round" />
+
+        {/* Checkmark - represents verification */}
         <path
-          d="M42 45L47 50L58 35"
+          d="M40 68L45 73L60 58"
           stroke="white"
-          strokeWidth="4"
+          strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
-          opacity="0.95"
         />
-
-        {/* Gradient definitions */}
-        <defs>
-          <linearGradient id="gradient1" x1="15" y1="5" x2="85" y2="95">
-            <stop offset="0%" stopColor="#3B82F6" />
-            <stop offset="50%" stopColor="#2563EB" />
-            <stop offset="100%" stopColor="#1D4ED8" />
-          </linearGradient>
-          <linearGradient id="gradient2" x1="15" y1="5" x2="85" y2="95">
-            <stop offset="0%" stopColor="#60A5FA" />
-            <stop offset="100%" stopColor="#1E40AF" />
-          </linearGradient>
-        </defs>
       </svg>
 
       {showText && (
         <div className="flex flex-col">
-          <span className={`${sizes[size].text} font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent`}>
+          <span className={`${sizes[size].text} font-bold text-bank-navy-900 tracking-tight`}>
             MS EXIMP
           </span>
-          <span className="text-xs text-slate-600 font-medium -mt-1">
+          <span className="text-[10px] text-bank-slate-600 font-medium uppercase tracking-wider -mt-0.5">
             Hypothecation
           </span>
         </div>

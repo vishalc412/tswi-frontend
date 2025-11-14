@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Logo from './Logo'
-import { Menu, X, Home, PlusCircle, RefreshCw, XCircle, FileText } from 'lucide-react'
+import { Menu, X, Home, PlusCircle, RefreshCw, XCircle, FileText, Shield } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const Navigation = () => {
@@ -20,10 +20,9 @@ const Navigation = () => {
   ]
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+    <nav className="sticky top-0 z-50 bg-white border-b border-bank-slate-200 shadow-bank">
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <Link href="/" className="flex items-center">
             <Logo size="md" showText={true} />
           </Link>
@@ -38,10 +37,10 @@ const Navigation = () => {
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all',
+                    'flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200',
                     isActive
-                      ? 'bg-blue-50 text-blue-700'
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                      ? 'bg-bank-navy-800 text-white'
+                      : 'text-bank-navy-700 hover:bg-bank-slate-100 hover:text-bank-navy-900'
                   )}
                 >
                   <Icon className="h-4 w-4" />
@@ -51,22 +50,29 @@ const Navigation = () => {
             })}
           </div>
 
+          {/* Security Badge */}
+          <div className="hidden md:flex items-center gap-2 text-xs text-bank-slate-600">
+            <Shield className="h-4 w-4 text-bank-navy-600" />
+            <span className="font-medium">Secure</span>
+          </div>
+
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
+            className="md:hidden p-2 rounded-md hover:bg-bank-slate-100 transition-colors"
+            aria-label="Toggle menu"
           >
             {isOpen ? (
-              <X className="h-6 w-6 text-slate-600" />
+              <X className="h-6 w-6 text-bank-navy-700" />
             ) : (
-              <Menu className="h-6 w-6 text-slate-600" />
+              <Menu className="h-6 w-6 text-bank-navy-700" />
             )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 space-y-1">
+          <div className="md:hidden py-4 space-y-1 border-t border-bank-slate-200">
             {navItems.map((item) => {
               const Icon = item.icon
               const isActive = pathname === item.href
@@ -76,10 +82,10 @@ const Navigation = () => {
                   href={item.href}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all',
+                    'flex items-center gap-3 px-4 py-3 rounded-md text-sm font-medium transition-all duration-200',
                     isActive
-                      ? 'bg-blue-50 text-blue-700'
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                      ? 'bg-bank-navy-800 text-white'
+                      : 'text-bank-navy-700 hover:bg-bank-slate-100'
                   )}
                 >
                   <Icon className="h-5 w-5" />
