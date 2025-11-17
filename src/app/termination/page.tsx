@@ -73,20 +73,20 @@ export default function TerminationPage() {
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl mb-4 shadow-lg">
-            <XCircle className="h-8 w-8 text-white" />
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-red-100 rounded-lg mb-4">
+            <XCircle className="h-7 w-7 text-red-700" />
           </div>
-          <h1 className="text-4xl font-bold mb-3">Hypothecation Termination</h1>
-          <p className="text-lg text-slate-600">
+          <h1 className="text-3xl font-bold text-bank-navy-900 mb-2">Hypothecation Termination</h1>
+          <p className="text-bank-slate-600">
             Close a completed hypothecation agreement
           </p>
         </div>
 
-        <Card className="border-2 shadow-xl">
+        <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Terminate Hypothecation</CardTitle>
-            <CardDescription className="text-base">
-              Enter the vehicle details and termination date. All fields are required.
+            <CardTitle>Terminate Hypothecation</CardTitle>
+            <CardDescription>
+              Enter vehicle details and termination date. All fields are required.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -94,11 +94,11 @@ export default function TerminationPage() {
               {/* Chassis Number */}
               <div className="space-y-2">
                 <Label htmlFor="chassisNo">
-                  Chassis Number <span className="text-red-500">*</span>
+                  Chassis Number <span className="text-red-600">*</span>
                 </Label>
                 <Input
                   id="chassisNo"
-                  placeholder="Enter chassis number"
+                  placeholder="e.g., MB1234567890ABCDE"
                   {...register('chassisNo')}
                   disabled={isSubmitting}
                 />
@@ -110,12 +110,11 @@ export default function TerminationPage() {
               {/* Termination Date */}
               <div className="space-y-2">
                 <Label htmlFor="terminationDt">
-                  Termination Date <span className="text-red-500">*</span>
+                  Termination Date <span className="text-red-600">*</span>
                 </Label>
                 <Input
                   id="terminationDt"
                   type="date"
-                  placeholder="YYYY-MM-DD"
                   {...register('terminationDt')}
                   disabled={isSubmitting}
                 />
@@ -127,7 +126,7 @@ export default function TerminationPage() {
               {/* Document URL */}
               <div className="space-y-2">
                 <Label htmlFor="docUrl">
-                  Document URL <span className="text-red-500">*</span>
+                  Document URL <span className="text-red-600">*</span>
                 </Label>
                 <Input
                   id="docUrl"
@@ -144,11 +143,11 @@ export default function TerminationPage() {
               {/* Registration Number */}
               <div className="space-y-2">
                 <Label htmlFor="regnNo">
-                  Registration Number <span className="text-red-500">*</span>
+                  Registration Number <span className="text-red-600">*</span>
                 </Label>
                 <Input
                   id="regnNo"
-                  placeholder="Enter registration number (e.g., MH12AB1234)"
+                  placeholder="e.g., MH12AB1234"
                   {...register('regnNo')}
                   disabled={isSubmitting}
                 />
@@ -177,7 +176,7 @@ export default function TerminationPage() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700"
+                  className="w-full"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -197,21 +196,6 @@ export default function TerminationPage() {
           </CardContent>
         </Card>
 
-        {/* Warning Card */}
-        <Card className="mt-6 bg-red-50 border-red-200">
-          <CardContent className="pt-6">
-            <h3 className="font-semibold text-red-900 mb-2 flex items-center gap-2">
-              <AlertCircle className="h-5 w-5" />
-              Important - Termination Notice
-            </h3>
-            <ul className="text-sm text-red-800 space-y-1 list-disc list-inside">
-              <li>This action will permanently close the hypothecation agreement</li>
-              <li>Ensure all loan obligations have been fulfilled before termination</li>
-              <li>Vehicle ownership will be released from hypothecation</li>
-              <li>Keep the termination document for future reference</li>
-            </ul>
-          </CardContent>
-        </Card>
       </div>
     </div>
   )

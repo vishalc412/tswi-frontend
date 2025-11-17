@@ -13,17 +13,17 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { apiService } from '@/lib/api'
 import { PlusCircle, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
 
-// Form validation schema - Field names match backend API specification
+// Validation schema matching backend API
 const additionSchema = z.object({
-  chasiNo: z.string().min(1, 'Chassis number is required').min(5, 'Chassis number must be at least 5 characters'),
-  eng_no: z.string().min(1, 'Engine number is required').min(5, 'Engine number must be at least 5 characters'),
-  hpa_from: z.string().min(1, 'HPA From date is required').refine((val) => validator.isDate(val), {
-    message: 'Please enter a valid date in YYYY-MM-DD format',
+  chasiNo: z.string().min(1, 'Chassis number is required').min(5, 'Must be at least 5 characters'),
+  eng_no: z.string().min(1, 'Engine number is required').min(5, 'Must be at least 5 characters'),
+  hpa_from: z.string().min(1, 'Start date is required').refine((val) => validator.isDate(val), {
+    message: 'Invalid date format (YYYY-MM-DD)',
   }),
-  hpa_upto: z.string().min(1, 'HPA Upto date is required').refine((val) => validator.isDate(val), {
-    message: 'Please enter a valid date in YYYY-MM-DD format',
+  hpa_upto: z.string().min(1, 'End date is required').refine((val) => validator.isDate(val), {
+    message: 'Invalid date format (YYYY-MM-DD)',
   }),
-  docurl: z.string().min(1, 'Document URL is required').url('Please enter a valid URL'),
+  docurl: z.string().min(1, 'Document URL is required').url('Must be a valid URL'),
   regnNo: z.string().min(1, 'Registration number is required'),
 })
 
@@ -33,12 +33,7 @@ export default function AdditionPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<AdditionFormData>({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<AdditionFormData>({
     resolver: zodResolver(additionSchema),
   })
 
@@ -64,7 +59,7 @@ export default function AdditionPage() {
     } catch (error) {
       setSubmitStatus({
         type: 'error',
-        message: 'Error: Check input parameters or network connection',
+        message: 'Error processing request. Please check your input and try again.',
       })
       console.error('Addition error:', error)
     } finally {
@@ -77,96 +72,76 @@ export default function AdditionPage() {
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl mb-4 shadow-lg">
-            <PlusCircle className="h-8 w-8 text-white" />
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-green-100 rounded-lg mb-4">
+            <PlusCircle className="h-7 w-7 text-green-700" />
           </div>
-          <h1 className="text-4xl font-bold mb-3">Hypothecation Addition</h1>
-          <p className="text-lg text-slate-600">
-            Create a new hypothecation agreement for a vehicle
+          <h1 className="text-3xl font-bold text-bank-navy-900 mb-2">Hypothecation Addition</h1>
+          <p className="text-bank-slate-600">
+            Create a new hypothecation agreement
           </p>
         </div>
 
-        <Card className="border-2 shadow-xl">
+        <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">New Hypothecation Record</CardTitle>
-            <CardDescription className="text-base">
-              Enter the vehicle and agreement details below. All fields are required.
+            <CardTitle>New Hypothecation Record</CardTitle>
+            <CardDescription>
+              Enter vehicle and agreement details. All fields are required.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {/* Chassis Number */}
               <div className="space-y-2">
-                <Label htmlFor="chasiNo">
-                  Chassis Number <span className="text-red-500">*</span>
-                </Label>
+                <Label htmlFor="chasiNo">Chassis Number <span className="text-red-600">*</span></Label>
                 <Input
                   id="chasiNo"
-                  placeholder="Enter chassis number"
+                  placeholder="e.g., MB1234567890ABCDE"
                   {...register('chasiNo')}
                   disabled={isSubmitting}
                 />
-                {errors.chasiNo && (
-                  <p className="text-sm text-red-600">{errors.chasiNo.message}</p>
-                )}
+                {errors.chasiNo && <p className="text-sm text-red-600">{errors.chasiNo.message}</p>}
               </div>
 
               {/* Engine Number */}
               <div className="space-y-2">
-                <Label htmlFor="eng_no">
-                  Engine Number <span className="text-red-500">*</span>
-                </Label>
+                <Label htmlFor="eng_no">Engine Number <span className="text-red-600">*</span></Label>
                 <Input
                   id="eng_no"
-                  placeholder="Enter engine number"
+                  placeholder="e.g., ENG123456"
                   {...register('eng_no')}
                   disabled={isSubmitting}
                 />
-                {errors.eng_no && (
-                  <p className="text-sm text-red-600">{errors.eng_no.message}</p>
-                )}
+                {errors.eng_no && <p className="text-sm text-red-600">{errors.eng_no.message}</p>}
               </div>
 
               {/* Date Fields */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="hpa_from">
-                    HPA From Date <span className="text-red-500">*</span>
-                  </Label>
+                  <Label htmlFor="hpa_from">HPA From Date <span className="text-red-600">*</span></Label>
                   <Input
                     id="hpa_from"
                     type="date"
-                    placeholder="YYYY-MM-DD"
                     {...register('hpa_from')}
                     disabled={isSubmitting}
                   />
-                  {errors.hpa_from && (
-                    <p className="text-sm text-red-600">{errors.hpa_from.message}</p>
-                  )}
+                  {errors.hpa_from && <p className="text-sm text-red-600">{errors.hpa_from.message}</p>}
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="hpa_upto">
-                    HPA Upto Date <span className="text-red-500">*</span>
-                  </Label>
+                  <Label htmlFor="hpa_upto">HPA Upto Date <span className="text-red-600">*</span></Label>
                   <Input
                     id="hpa_upto"
                     type="date"
-                    placeholder="YYYY-MM-DD"
                     {...register('hpa_upto')}
                     disabled={isSubmitting}
                   />
-                  {errors.hpa_upto && (
-                    <p className="text-sm text-red-600">{errors.hpa_upto.message}</p>
-                  )}
+                  {errors.hpa_upto && <p className="text-sm text-red-600">{errors.hpa_upto.message}</p>}
                 </div>
               </div>
 
               {/* Document URL */}
               <div className="space-y-2">
-                <Label htmlFor="docurl">
-                  Document URL <span className="text-red-500">*</span>
-                </Label>
+                <Label htmlFor="docurl">Document URL <span className="text-red-600">*</span></Label>
                 <Input
                   id="docurl"
                   type="url"
@@ -174,25 +149,19 @@ export default function AdditionPage() {
                   {...register('docurl')}
                   disabled={isSubmitting}
                 />
-                {errors.docurl && (
-                  <p className="text-sm text-red-600">{errors.docurl.message}</p>
-                )}
+                {errors.docurl && <p className="text-sm text-red-600">{errors.docurl.message}</p>}
               </div>
 
               {/* Registration Number */}
               <div className="space-y-2">
-                <Label htmlFor="regnNo">
-                  Registration Number <span className="text-red-500">*</span>
-                </Label>
+                <Label htmlFor="regnNo">Registration Number <span className="text-red-600">*</span></Label>
                 <Input
                   id="regnNo"
-                  placeholder="Enter registration number (e.g., MH12AB1234)"
+                  placeholder="e.g., MH12AB1234"
                   {...register('regnNo')}
                   disabled={isSubmitting}
                 />
-                {errors.regnNo && (
-                  <p className="text-sm text-red-600">{errors.regnNo.message}</p>
-                )}
+                {errors.regnNo && <p className="text-sm text-red-600">{errors.regnNo.message}</p>}
               </div>
 
               {/* Status Messages */}
@@ -203,21 +172,14 @@ export default function AdditionPage() {
                   ) : (
                     <AlertCircle className="h-4 w-4" />
                   )}
-                  <AlertTitle>
-                    {submitStatus.type === 'success' ? 'Success' : 'Error'}
-                  </AlertTitle>
+                  <AlertTitle>{submitStatus.type === 'success' ? 'Success' : 'Error'}</AlertTitle>
                   <AlertDescription>{submitStatus.message}</AlertDescription>
                 </Alert>
               )}
 
               {/* Submit Button */}
               <div className="pt-4">
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
+                <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-5 w-5 animate-spin" />
@@ -232,19 +194,6 @@ export default function AdditionPage() {
                 </Button>
               </div>
             </form>
-          </CardContent>
-        </Card>
-
-        {/* Info Card */}
-        <Card className="mt-6 bg-blue-50 border-blue-200">
-          <CardContent className="pt-6">
-            <h3 className="font-semibold text-blue-900 mb-2">Important Information</h3>
-            <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
-              <li>Ensure all vehicle details are accurate before submission</li>
-              <li>Dates must be in YYYY-MM-DD format</li>
-              <li>Document URL should be accessible and valid</li>
-              <li>Registration number should match official RTO records</li>
-            </ul>
           </CardContent>
         </Card>
       </div>

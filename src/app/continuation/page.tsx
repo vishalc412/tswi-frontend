@@ -78,20 +78,20 @@ export default function ContinuationPage() {
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl mb-4 shadow-lg">
-            <RefreshCw className="h-8 w-8 text-white" />
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-100 rounded-lg mb-4">
+            <RefreshCw className="h-7 w-7 text-blue-700" />
           </div>
-          <h1 className="text-4xl font-bold mb-3">Hypothecation Continuation</h1>
-          <p className="text-lg text-slate-600">
-            Extend an existing hypothecation agreement period
+          <h1 className="text-3xl font-bold text-bank-navy-900 mb-2">Hypothecation Continuation</h1>
+          <p className="text-bank-slate-600">
+            Extend an existing hypothecation agreement
           </p>
         </div>
 
-        <Card className="border-2 shadow-xl">
+        <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Continue Hypothecation</CardTitle>
-            <CardDescription className="text-base">
-              Enter the transaction details and new period for the continuation. All fields are required.
+            <CardTitle>Continue Hypothecation</CardTitle>
+            <CardDescription>
+              Enter transaction details and new period. All fields are required.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -99,11 +99,11 @@ export default function ContinuationPage() {
               {/* Transaction ID */}
               <div className="space-y-2">
                 <Label htmlFor="transactionId">
-                  Transaction ID <span className="text-red-500">*</span>
+                  Transaction ID <span className="text-red-600">*</span>
                 </Label>
                 <Input
                   id="transactionId"
-                  placeholder="Enter transaction ID from previous agreement"
+                  placeholder="e.g., TXN123456"
                   {...register('transactionId')}
                   disabled={isSubmitting}
                 />
@@ -115,11 +115,11 @@ export default function ContinuationPage() {
               {/* Chassis Number */}
               <div className="space-y-2">
                 <Label htmlFor="chasiNo">
-                  Chassis Number <span className="text-red-500">*</span>
+                  Chassis Number <span className="text-red-600">*</span>
                 </Label>
                 <Input
                   id="chasiNo"
-                  placeholder="Enter chassis number"
+                  placeholder="e.g., MB1234567890ABCDE"
                   {...register('chasiNo')}
                   disabled={isSubmitting}
                 />
@@ -131,12 +131,12 @@ export default function ContinuationPage() {
               {/* FNCR Code */}
               <div className="space-y-2">
                 <Label htmlFor="fncrCode">
-                  FNCR Code <span className="text-red-500">*</span>
+                  FNCR Code <span className="text-red-600">*</span>
                 </Label>
                 <Input
                   id="fncrCode"
                   type="number"
-                  placeholder="Enter FNCR code (e.g., 12345)"
+                  placeholder="e.g., 12345"
                   {...register('fncrCode')}
                   disabled={isSubmitting}
                 />
@@ -149,12 +149,11 @@ export default function ContinuationPage() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="hpc_from">
-                    HPA From Date <span className="text-red-500">*</span>
+                    HPC From Date <span className="text-red-600">*</span>
                   </Label>
                   <Input
                     id="hpc_from"
                     type="date"
-                    placeholder="YYYY-MM-DD"
                     {...register('hpc_from')}
                     disabled={isSubmitting}
                   />
@@ -165,12 +164,11 @@ export default function ContinuationPage() {
 
                 <div className="space-y-2">
                   <Label htmlFor="hpc_upto">
-                    HPA Upto Date <span className="text-red-500">*</span>
+                    HPC Upto Date <span className="text-red-600">*</span>
                   </Label>
                   <Input
                     id="hpc_upto"
                     type="date"
-                    placeholder="YYYY-MM-DD"
                     {...register('hpc_upto')}
                     disabled={isSubmitting}
                   />
@@ -183,7 +181,7 @@ export default function ContinuationPage() {
               {/* Document URL */}
               <div className="space-y-2">
                 <Label htmlFor="docurl">
-                  Document URL <span className="text-red-500">*</span>
+                  Document URL <span className="text-red-600">*</span>
                 </Label>
                 <Input
                   id="docurl"
@@ -200,11 +198,11 @@ export default function ContinuationPage() {
               {/* Registration Number */}
               <div className="space-y-2">
                 <Label htmlFor="regnNo">
-                  Registration Number <span className="text-red-500">*</span>
+                  Registration Number <span className="text-red-600">*</span>
                 </Label>
                 <Input
                   id="regnNo"
-                  placeholder="Enter registration number (e.g., MH12AB1234)"
+                  placeholder="e.g., MH12AB1234"
                   {...register('regnNo')}
                   disabled={isSubmitting}
                 />
@@ -253,18 +251,6 @@ export default function ContinuationPage() {
           </CardContent>
         </Card>
 
-        {/* Info Card */}
-        <Card className="mt-6 bg-blue-50 border-blue-200">
-          <CardContent className="pt-6">
-            <h3 className="font-semibold text-blue-900 mb-2">Important Information</h3>
-            <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
-              <li>Transaction ID must match an existing hypothecation record</li>
-              <li>The new period should extend beyond the current agreement</li>
-              <li>All vehicle details must match the original agreement</li>
-              <li>Updated continuation document should be provided</li>
-            </ul>
-          </CardContent>
-        </Card>
       </div>
     </div>
   )

@@ -106,32 +106,29 @@ export default function ReportsPage() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl mb-4 shadow-lg">
-            <FileText className="h-8 w-8 text-white" />
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-purple-100 rounded-lg mb-4">
+            <FileText className="h-7 w-7 text-purple-700" />
           </div>
-          <h1 className="text-4xl font-bold mb-3">Reports</h1>
-          <p className="text-lg text-slate-600">
-            Generate and download hypothecation reports for specific dates
+          <h1 className="text-3xl font-bold text-bank-navy-900 mb-2">Reports</h1>
+          <p className="text-bank-slate-600">
+            Generate and download hypothecation reports
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           {/* Report Generation Card */}
-          <Card className="border-2 shadow-xl">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-2xl flex items-center gap-2">
-                <CalendarIcon className="h-6 w-6 text-blue-600" />
-                Select Report Date
-              </CardTitle>
-              <CardDescription className="text-base">
+              <CardTitle>Select Report Date</CardTitle>
+              <CardDescription>
                 Choose a date to generate or download the daily report
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* PrimeReact Calendar */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-700">
-                  Report Date <span className="text-red-500">*</span>
+                <label className="text-sm font-semibold text-bank-navy-800">
+                  Report Date <span className="text-red-600">*</span>
                 </label>
                 <Calendar
                   value={selectedDate}
@@ -189,78 +186,26 @@ export default function ReportsPage() {
           </Card>
 
           {/* Information Card */}
-          <Card className="border-2 shadow-xl bg-gradient-to-br from-blue-50 to-purple-50">
+          <Card className="bg-bank-slate-50">
             <CardHeader>
-              <CardTitle className="text-2xl">Report Information</CardTitle>
+              <CardTitle>Report Information</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <FileText className="h-4 w-4 text-blue-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-slate-900">Report Contents</h3>
-                    <p className="text-sm text-slate-600">
-                      Daily hypothecation records including additions, continuations, and terminations
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Download className="h-4 w-4 text-green-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-slate-900">Download Format</h3>
-                    <p className="text-sm text-slate-600">
-                      Reports are generated in Excel (.xlsx) format for easy analysis
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <CalendarIcon className="h-4 w-4 text-purple-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-slate-900">Date Range</h3>
-                    <p className="text-sm text-slate-600">
-                      Historical reports available up to current date
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-blue-200">
-                <h3 className="font-semibold text-slate-900 mb-2">Instructions</h3>
-                <ol className="text-sm text-slate-600 space-y-1 list-decimal list-inside">
-                  <li>Select a date using the calendar picker</li>
-                  <li>Click "Generate Report" to create the report</li>
-                  <li>Click "Download Report" to download the Excel file</li>
-                  <li>Open the file in Excel or Google Sheets</li>
-                </ol>
+              <div className="space-y-4 text-sm text-bank-slate-600">
+                <p>
+                  <strong className="text-bank-navy-800">Report Contents:</strong> Daily hypothecation records including additions, continuations, and terminations
+                </p>
+                <p>
+                  <strong className="text-bank-navy-800">Download Format:</strong> Excel (.xlsx) format for easy analysis
+                </p>
+                <p>
+                  <strong className="text-bank-navy-800">Date Range:</strong> Historical reports available up to current date
+                </p>
               </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Additional Info Card */}
-        <Card className="mt-6 bg-yellow-50 border-yellow-200">
-          <CardContent className="pt-6">
-            <div className="flex items-start gap-3">
-              <i className="pi pi-info-circle text-yellow-700 text-xl"></i>
-              <div>
-                <h3 className="font-semibold text-yellow-900 mb-1">Note</h3>
-                <p className="text-sm text-yellow-800">
-                  {process.env.NEXT_PUBLIC_API_MODE === 'dummy'
-                    ? 'Currently running in dummy mode. Reports will contain sample data. Switch to production mode in .env.local to access actual data.'
-                    : 'Reports contain actual data from the backend system. Ensure you have proper authorization to download sensitive information.'}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   )
