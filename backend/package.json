@@ -1,0 +1,22 @@
+{
+  "name": "hypothecation-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Hypothecation Management System",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": ["hypothecation", "api", "backend"],
+  "author": "MS EXIMP",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
